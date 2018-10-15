@@ -1,14 +1,14 @@
 {
     "development":{
         "id":"master-server-1",
-        "host":"120.92.139.102",
-        "port":13005
+        "host":"47.93.52.15",
+        "port":3005
     },
 
     "production":{
         "id":"master-server-1",
-        "host":"120.92.139.102",
-        "port":13005
+        "host":"47.93.52.15",
+        "port":3005
     }
 
 }
