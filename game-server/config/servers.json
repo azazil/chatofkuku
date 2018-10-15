@@ -4,7 +4,7 @@
              {"id":"connector-server-1", "host":"47.93.52.15", "port":4050, "clientPort": 3050, "frontend": true}
          ],
         "chat":[
-             {"id":"chat-server-1", "host":"47.93.52.15", "port":6050}
+             {"id":"chat-server-1", "host":"172.17.137.178", "port":6050}
         ],
         "gate":[
            {"id": "gate-server-1", "host": "47.93.52.15", "clientPort": 3014, "frontend": true}
@@ -15,7 +15,7 @@
              {"id":"connector-server-1", "host":"47.93.52.15", "port":4050, "clientPort": 3050, "frontend": true}
          ],
         "chat":[
-             {"id":"chat-server-1", "host":"47.93.52.15", "port":6050}
+             {"id":"chat-server-1", "host":"172.17.137.178", "port":6050}
         ],
         "gate":[
            {"id": "gate-server-1", "host": "47.93.52.15", "clientPort": 3014, "frontend": true}
