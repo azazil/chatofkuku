@@ -59,8 +59,6 @@ handler.enter = function(msg, session, next) {
  */
 handler.change = function(msg, session, next) {
 	var self = this;
-	var rid = msg.rid;
-	var uid = msg.username + '*' + rid
 	var sessionService = self.app.get('sessionService');
 
 	//user not log in
@@ -73,27 +71,30 @@ handler.change = function(msg, session, next) {
 	// }
 
 	var oldRid = session.get('rid');
+	var oldUid = msg.username + '*' + oldRid
+	//kick user leave old channel
+	self.app.rpc.chat.chatRemote.kick(session, oldUid, self.app.get('serverId'), oldRid, function(users){
+		console.warn(oldUid + 'leave old chatroom!!');
+		next(null, {
+		});
+	});
+
+	var rid = msg.rid;
+	var uid = msg.username + '*' + rid
 	session.set('rid', rid);
 	session.push('rid', function(err) {
 		if(err) {
 			console.error('set rid for session service failed! error is : %j', err.stack);
 		}
-	});
+	});	
 
-	//kick user leave old channel
-	self.app.rpc.chat.chatRemote.kick(session, uid, self.app.get('serverId'), oldRid, function(users){
-		console.warn('leave old chatroom!!');
+	//put user into new channel
+	self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
+		console.warn(uid + 'enter new chatroom!!');
 		next(null, {
+			users:users
 		});
 	});
-
-	// //put user into new channel
-	// self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
-	// 	console.warn('new chatroom connetor!!');
-	// 	next(null, {
-	// 		users:users
-	// 	});
-	// });
 };
 
 
