@@ -64,13 +64,13 @@ handler.change = function(msg, session, next) {
 	var sessionService = self.app.get('sessionService');
 
 	//user not log in
-	if( ! sessionService.getByUid(uid)) {
-		next(null, {
-			code: 500,
-			error: true
-		});
-		return;
-	}
+	// if( ! sessionService.getByUid(uid)) {
+	// 	next(null, {
+	// 		code: 500,
+	// 		error: true
+	// 	});
+	// 	return;
+	// }
 
 	var oldRid = session.get('rid');
 	session.set('rid', rid);
