@@ -71,7 +71,7 @@ handler.change = function(msg, session, next) {
 	// }
 
 	var oldRid = session.get('rid');
-	var oldUid = msg.username + '*' + oldRid
+	var oldUid = msg.username + '*' + oldRid;
 	//kick user leave old channel
 	self.app.rpc.chat.chatRemote.kick(session, oldUid, self.app.get('serverId'), oldRid, function(users){
 		console.warn(oldUid + 'leave old chatroom!!');
@@ -80,7 +80,7 @@ handler.change = function(msg, session, next) {
 	});
 
 	var rid = msg.rid;
-	var uid = msg.username + '*' + rid
+	var uid = msg.username + '*' + rid;
 	session.set('rid', rid);
 	session.push('rid', function(err) {
 		if(err) {
