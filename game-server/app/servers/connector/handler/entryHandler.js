@@ -87,13 +87,13 @@ handler.change = function(msg, session, next) {
 		});
 	});
 
-	//put user into new channel
-	self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
-		console.warn('new chatroom connetor!!');
-		next(null, {
-			users:users
-		});
-	});
+	// //put user into new channel
+	// self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
+	// 	console.warn('new chatroom connetor!!');
+	// 	next(null, {
+	// 		users:users
+	// 	});
+	// });
 };
 
 
