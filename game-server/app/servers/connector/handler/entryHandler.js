@@ -70,14 +70,20 @@ handler.change = function(msg, session, next) {
 	// 	return;
 	// }
 
-	var oldRid = session.get('rid');
-	var oldUid = msg.username + '*' + oldRid;
-	//kick user leave old channel
-	self.app.rpc.chat.chatRemote.kick(session, oldUid, self.app.get('serverId'), oldRid, function(users){
-		console.warn(oldUid + 'leave old chatroom!!');
+	// var oldRid = session.get('rid');
+	// var oldUid = msg.username + '*' + oldRid;
+	// //kick user leave old channel
+	// self.app.rpc.chat.chatRemote.kick(session, oldUid, self.app.get('serverId'), oldRid, function(users){
+	// 	console.warn(oldUid + 'leave old chatroom!!');
+	// 	next(null, {
+	// 	});
+	// });
+
+	self.onUserLeave(this,session) {
+		console.warn('leave old chatroom!!');
 		next(null, {
 		});
-	});
+	}
 
 	var rid = msg.rid;
 	var uid = msg.username + '*' + rid;
@@ -96,7 +102,6 @@ handler.change = function(msg, session, next) {
 		});
 	});
 };
-
 
 /**
  * User log out handler
