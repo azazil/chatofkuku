@@ -42,7 +42,7 @@ handler.enter = function(msg, session, next) {
 
 	//put user into channel
 	self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
-		console.warn('new chatroom connetor!!');
+		console.warn(uid + 'new chatroom connetor!!');
 		next(null, {
 			users:users
 		});
@@ -60,22 +60,24 @@ handler.enter = function(msg, session, next) {
 handler.change = function(msg, session, next) {
 	var self = this;
 	var sessionService = self.app.get('sessionService');
-
-	//user not log in
-	// if( ! sessionService.getByUid(uid)) {
-	// 	next(null, {
-	// 		code: 500,
-	// 		error: true
-	// 	});
-	// 	return;
-	// }
-
 	var oldRid = session.get('rid');
 	var oldUid = msg.username + '*' + oldRid;
+
+	//user not log in
+	if( ! sessionService.getByUid(oldUid)) {
+		next(null, {
+			code: 500,
+			error: true
+		});
+		return;
+	}
+
+
 	//kick user leave old channel
 	self.app.rpc.chat.chatRemote.kick(session, oldUid, self.app.get('serverId'), oldRid, function(users){
-		session.unbind(oldUid);
 		console.warn(oldUid + 'leave old chatroom!!');
+		sessionService.kickByUid(oldUid);
+		console.warn(oldUid + 'leave sessionService!!');
 		next(null, {
 			users:users
 		});
