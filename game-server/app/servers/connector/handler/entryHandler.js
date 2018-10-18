@@ -50,14 +50,14 @@ handler.enter = function(msg, session, next) {
 };
 
 /**
- * client change chat room.
+ * client leave chat room.
  *
  * @param  {Object}   msg     request message
  * @param  {Object}   session current session object
  * @param  {Function} next    next stemp callback
  * @return {Void}
  */
-handler.change = function(msg, session, next) {
+handler.leave = function(msg, session, next) {
 	var self = this;
 	var sessionService = self.app.get('sessionService');
 	var oldRid = session.get('rid');
@@ -81,23 +81,6 @@ handler.change = function(msg, session, next) {
 		});
 	});
 	session.unbind(oldUid);
-
-	// var rid = msg.rid;
-	// var uid = msg.username + '*' + rid;
-	// session.set('rid', rid);
-	// session.push('rid', function(err) {
-	// 	if(err) {
-	// 		console.error('set rid for session service failed! error is : %j', err.stack);
-	// 	}
-	// });	
-
-	// //put user into new channel
-	// self.app.rpc.chat.chatRemote.add(session, uid, self.app.get('serverId'), rid, true, function(users){
-	// 	console.warn(uid + 'enter new chatroom!!');
-	// 	next(null, {
-	// 		users:users
-	// 	});
-	// });
 };
 
 /**
