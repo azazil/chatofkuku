@@ -80,7 +80,7 @@ handler.change = function(msg, session, next) {
 			users:users
 		});
 	});
-	sessionService.kickByUid(oldUid);
+	sessionService.kickBySid(self.app.get('serverId'));
 	console.warn(oldUid + 'leave sessionService!!');
 
 	// var rid = msg.rid;
